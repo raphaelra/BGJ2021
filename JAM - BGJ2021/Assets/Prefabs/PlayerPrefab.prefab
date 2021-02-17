@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8476b6be471dad46a0fde07efb60789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 15
+  moveSpeed: 20
+  jumpForce: 20
   controller: {fileID: 7647374924382209302}
   gravityScale: 5
   anim: {fileID: 8707022840094874896}
@@ -144,6 +144,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1d649e2d14ac5414eb4aa4ebd28c2d1f, type: 3}
       propertyPath: m_Name
       value: radio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869873546869171050, guid: 1d649e2d14ac5414eb4aa4ebd28c2d1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d649e2d14ac5414eb4aa4ebd28c2d1f, type: 3}
