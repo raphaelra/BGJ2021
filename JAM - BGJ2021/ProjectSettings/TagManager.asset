@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPC
   - Follow Manager
+  - Wall
   layers:
   - Default
   - TransparentFX

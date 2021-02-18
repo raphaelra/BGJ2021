@@ -70,6 +70,7 @@ MonoBehaviour:
   anim: {fileID: 8707022840094874896}
   pivot: {fileID: 2397553867824773281}
   rotateSpeed: 60
+  move_rate: 1
   playerModel: {fileID: 3279952431949413625}
 --- !u!95 &8707022840094874896
 Animator:
@@ -81,7 +82,7 @@ Animator:
   m_GameObject: {fileID: 3279952431949413625}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8fd8f53d682899b419e49a9ce954c038, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -107,11 +108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d649e2d14ac5414eb4aa4ebd28c2d1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d649e2d14ac5414eb4aa4ebd28c2d1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d649e2d14ac5414eb4aa4ebd28c2d1f, type: 3}
       propertyPath: m_LocalRotation.w
