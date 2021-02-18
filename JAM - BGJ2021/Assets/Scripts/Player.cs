@@ -35,8 +35,6 @@ public class Player : MonoBehaviour
         {
             current_time -= Time.deltaTime;
         }
-
-        print(current_time);
     }
 
     void Move()
