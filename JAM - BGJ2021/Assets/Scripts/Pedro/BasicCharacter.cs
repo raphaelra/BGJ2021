@@ -16,13 +16,15 @@ public class BasicCharacter : MonoBehaviour
 	public Animator anim;
 	public Transform pivot;
 	public float rotateSpeed;
+	[SerializeField] float move_rate = 1f;
 
 	public GameObject playerModel;
 	void Start(){
 		controller = GetComponent<CharacterController>();
+		StartCoroutine("Move");
 	}
 
-	void Update(){
+	/*void Update(){
 		horizontal = Input.GetAxis("Horizontal");
 		vertical = Input.GetAxis("Vertical");
 		
@@ -46,5 +48,19 @@ public class BasicCharacter : MonoBehaviour
 
 		//anim.SetFloat("Speed", (Mathf.Abs(vertical)) + Mathf.Abs(horizontal));
 
+	}*/
+
+	IEnumerator Move()
+	{
+		yield return new WaitForSeconds(move_rate);
+
+		horizontal = Input.GetAxis("Horizontal");
+		vertical = Input.GetAxis("Vertical");
+
+		moveDirection = new Vector3(horizontal * moveSpeed, moveDirection.y, vertical * moveSpeed);
+		moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
+		controller.Move(moveDirection * Time.deltaTime);
+
+		StartCoroutine("Move");
 	}
 }
