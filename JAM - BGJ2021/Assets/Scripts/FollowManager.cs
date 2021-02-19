@@ -5,16 +5,23 @@ using UnityEngine;
 public class FollowManager : MonoBehaviour
 {
     public List<Transform> NPC = new List<Transform>();
+    Transform player;
 
     void Start()
     {
-        Transform player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
         NPC.Add(player);
     }
 
     public void UpdateList(Transform obj)
     {
         NPC.Add(obj);
+    }
+
+    public void ResetList()
+    {
+        NPC.Clear();
+        NPC.Add(player);
     }
     
 }
