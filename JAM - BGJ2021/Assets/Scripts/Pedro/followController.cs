@@ -8,6 +8,7 @@ public class followController : MonoBehaviour
     public UnityEngine.AI.NavMeshAgent agent2;
     public GameObject player;
     public GameObject bola;
+	public Animator anim;
 
     bool segue = false;
 
@@ -22,7 +23,8 @@ public class followController : MonoBehaviour
     	}
     	if(segue == true){
         	agent.SetDestination(player.transform.position);
-            agent2.SetDestination(bola.transform.position);
+			anim.SetBool("idle", false);
+            //agent2.SetDestination(bola.transform.position);
     	}
     }
 }

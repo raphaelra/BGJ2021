@@ -63,9 +63,12 @@ public class BasicCharacter : MonoBehaviour
 			{
 				anim.SetBool("land", true);	
 			}
+		}else
+		{
+			moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
 		}
 
-		moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
+		
 		controller.Move(moveDirection * Time.deltaTime);
 
 		if(horizontal != 0 || vertical != 0){
@@ -81,9 +84,9 @@ public class BasicCharacter : MonoBehaviour
 
 	void OnControllerColliderHit(ControllerColliderHit other){
    		if (other.transform.tag == "Wall"){
+			anim.SetTrigger("death");
 			moveSpeed = 0;
 			moveDirection = new Vector3(0, 0, 0);
-			anim.SetTrigger("death");
     		Debug.Log ("Player bateu na parede");
    		}
  	}
