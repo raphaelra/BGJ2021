@@ -16,7 +16,6 @@ public class BasicCharacter : MonoBehaviour
 	public Animator anim;
 	public Transform pivot;
 	public float rotateSpeed;
-	[SerializeField] float move_rate = 1f;
 
 	public GameObject playerModel;
 
