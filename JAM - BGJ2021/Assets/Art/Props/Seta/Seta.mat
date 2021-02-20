@@ -74,7 +74,7 @@ Material:
     - _UnlitThreshold: 0.1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.26024947, g: 0.9063317, b: 0, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnlitColor: {r: 0.22857133, g: 0.8, b: 0, a: 1}
+    - _UnlitColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   m_BuildTextureStacks: []

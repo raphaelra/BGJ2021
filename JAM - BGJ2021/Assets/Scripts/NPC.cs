@@ -33,7 +33,8 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
-        distance = Vector3.Distance(player.transform.position, this.transform.position);
+        Debug.Log(index);
+        distance = Vector3.Distance(follow_manager.NPC[index].position, this.transform.position);
         player_in_range = Physics.CheckSphere(transform.position, view_range, player_layer);
 
         if(player_in_range)
@@ -46,8 +47,8 @@ public class NPC : MonoBehaviour
         }
 
         if(can_follow)
-        {            
-            agent.SetDestination(follow_manager.NPC[index].transform.position);
+        {   
+            agent.SetDestination(follow_manager.NPC[index].transform.position);   
             segue = true;
             Seta.active = false;
 
@@ -71,7 +72,7 @@ public class NPC : MonoBehaviour
 			}
     	} 
         
-        if (!entregue) {
+        if (!entregue && !segue) {
 			if (distance >= 20f){
 				npcAnim.SetBool("wave", true);
 			} else {

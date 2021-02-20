@@ -44,8 +44,8 @@ public class EndGoal : MonoBehaviour
             npc.can_follow = false;
             npc.segue = false;
             npc.entregue = true;
-            npc.CancelAnimation();
-            danceRandom.Randomizer();
+            npc.Invoke("CancelAnimation", 0.5f);
+            danceRandom.Invoke("Randomizer", 0.5f);
 
             print(agent.name + " está indo para " + end_position.position);
             agent.SetDestination(end_position.position + difference);

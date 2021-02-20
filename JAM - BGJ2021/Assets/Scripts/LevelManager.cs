@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] EndGoal end;
     Transform player;
 
+    public GameObject fadeT;
+
     void Start()
     {
         follow_manager = GetComponent<FollowManager>();
@@ -24,7 +26,20 @@ public class LevelManager : MonoBehaviour
         if(current_npcs >= total_of_npcs)
         {
             EndLevelDisplay();
-            NextLevel(next_level);
+
+            Animator anim = player.GetComponentInChildren<Animator>();
+            CharacterController controller = player.GetComponent<CharacterController>();
+            controller.enabled = false;
+            
+            GameObject playerModel = GameObject.Find("radio");
+            playerModel.transform.rotation = Quaternion.Euler(0f, 180f, 0f);   
+
+            anim.SetBool("death", false);
+		    anim.SetBool("walk", false);
+		    anim.SetBool("land", false);
+            anim.SetTrigger("dance");
+
+            NextLevel();
         }
     }
 
@@ -39,8 +54,21 @@ public class LevelManager : MonoBehaviour
         //animar a UI com um botãoq que triggar que NextLevel()
     }
 
-    void NextLevel(string s)
+    void NextLevel()
     {
+        StartCoroutine("ChangeScene");
+    }
+
+    void NextLevelButton(string ss)
+    {
+        SceneManager.LoadScene(ss);
+    }
+
+    IEnumerator ChangeScene()
+    {
+        yield return new WaitForSeconds(4);
+        fadeT.active = true;
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(next_level);
     }
 }
