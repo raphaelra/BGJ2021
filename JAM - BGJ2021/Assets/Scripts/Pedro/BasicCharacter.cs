@@ -26,6 +26,7 @@ public class BasicCharacter : MonoBehaviour
 	void Start(){
 		controller = GetComponent<CharacterController>();
 		firstPosition = transform.position;
+		anim.SetTrigger("dance");
 		//StartCoroutine("Move");
 	}
 
