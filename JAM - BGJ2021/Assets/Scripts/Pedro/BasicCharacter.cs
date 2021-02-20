@@ -20,58 +20,72 @@ public class BasicCharacter : MonoBehaviour
 
 	public GameObject playerModel;
 
+	private bool isDead = false;
+	private Vector3 firstPosition;
+
 	void Start(){
 		controller = GetComponent<CharacterController>();
+		firstPosition = transform.position;
 		//StartCoroutine("Move");
 	}
 
 	void Update(){
 		horizontal = Input.GetAxis("Horizontal");
-		vertical = Input.GetAxis("Vertical");	
+		vertical = Input.GetAxis("Vertical");
+		Debug.Log(controller.isGrounded);
 		
-		if (Input.GetKeyDown(KeyCode.W)){
-			moveDirection = new Vector3(0f * moveSpeed, moveDirection.y, 1f * moveSpeed);
-		}else if (Input.GetKeyDown(KeyCode.S)){
-			moveDirection = new Vector3(0f * moveSpeed, moveDirection.y, -1f * moveSpeed);
-		}else if (Input.GetKeyDown(KeyCode.D)){
-			moveDirection = new Vector3(1f * moveSpeed, moveDirection.y, 0f * moveSpeed);
-		}else if (Input.GetKeyDown(KeyCode.A)){
-			moveDirection = new Vector3(-1f * moveSpeed, moveDirection.y, 0f * moveSpeed);
-		}else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)){
-			moveDirection = new Vector3(1f * moveSpeed, moveDirection.y, 1f * moveSpeed);
-		}else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)){
-			moveDirection = new Vector3(-1f * moveSpeed, moveDirection.y, 1f * moveSpeed);
-		}else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)){
-			moveDirection = new Vector3(1f * moveSpeed, moveDirection.y, -1f * moveSpeed);
-		}else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A)){
-			moveDirection = new Vector3(-1f * moveSpeed, moveDirection.y, -1f * moveSpeed);
+		if (!isDead)
+		{
+			if (Input.GetKeyDown(KeyCode.W)){
+				moveDirection = new Vector3(0f * moveSpeed, moveDirection.y, 1f * moveSpeed);
+			}else if (Input.GetKeyDown(KeyCode.S)){
+				moveDirection = new Vector3(0f * moveSpeed, moveDirection.y, -1f * moveSpeed);
+			}else if (Input.GetKeyDown(KeyCode.D)){
+				moveDirection = new Vector3(1f * moveSpeed, moveDirection.y, 0f * moveSpeed);
+			}else if (Input.GetKeyDown(KeyCode.A)){
+				moveDirection = new Vector3(-1f * moveSpeed, moveDirection.y, 0f * moveSpeed);
+			}else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)){
+				moveDirection = new Vector3(1f * moveSpeed, moveDirection.y, 1f * moveSpeed);
+			}else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)){
+				moveDirection = new Vector3(-1f * moveSpeed, moveDirection.y, 1f * moveSpeed);
+			}else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)){
+				moveDirection = new Vector3(1f * moveSpeed, moveDirection.y, -1f * moveSpeed);
+			}else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A)){
+				moveDirection = new Vector3(-1f * moveSpeed, moveDirection.y, -1f * moveSpeed);
+			}
+			controller.Move(moveDirection * Time.deltaTime);
+			//moveDirection = new Vector3(horizontal * moveSpeed, moveDirection.y, vertical * moveSpeed);
+		}else
+		{
+			StartCoroutine("Revive");
 		}
-		//moveDirection = new Vector3(horizontal * moveSpeed, moveDirection.y, vertical * moveSpeed);
 
 		if(controller.isGrounded){
+			anim.SetBool("fall", false);
 			if (Input.GetKeyDown(KeyCode.Space)){
-				anim.SetBool("land", false);
+				anim.SetBool("land", false);	
 				if(this.gameObject.transform.position.y >= 2f)
 				{
 					anim.SetTrigger("jump2");
-					moveDirection.y = jumpForce+5;
+					moveDirection.y = jumpForce+8;
 				}else {
 					anim.SetTrigger("jump");
-					moveDirection.y = jumpForce;
+					moveDirection.y = jumpForce+3;
 				}
 			}else 
 			{
 				anim.SetBool("land", true);	
 			}
 		}else
-		{
+		{	
+			if(this.gameObject.transform.position.y >= 7f)
+			{
+				anim.SetBool("fall", true);	
+			}
 			moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
 		}
 
-		
-		controller.Move(moveDirection * Time.deltaTime);
-
-		if(horizontal != 0 || vertical != 0){
+		if(((horizontal != 0 || vertical != 0)) && !isDead){
 			anim.SetBool("walk", true);
 			transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
 			Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
@@ -84,12 +98,29 @@ public class BasicCharacter : MonoBehaviour
 
 	void OnControllerColliderHit(ControllerColliderHit other){
    		if (other.transform.tag == "Wall"){
-			anim.SetTrigger("death");
+			anim.SetBool("death", true);
+			moveDirection = new Vector3 (0,0,0);
+			isDead = true;
 			moveSpeed = 0;
-			moveDirection = new Vector3(0, 0, 0);
     		Debug.Log ("Player bateu na parede");
    		}
  	}
+
+	public IEnumerator Revive()
+	{		
+			
+		yield return new WaitForSeconds(1f);
+
+		isDead = false;	
+		firstPosition.y = transform.position.y;
+		transform.position = new Vector3(firstPosition.x, 20f, firstPosition.z);
+		playerModel.transform.rotation = Quaternion.Euler(0f, -135f, 0f);
+		anim.SetBool("death", false);
+		anim.SetBool("walk", false);
+		anim.SetBool("land", false);
+		moveDirection = new Vector3 (0,0,0);		
+		moveSpeed = 20;
+	}
 
 	/*IEnumerator Move()
 	{
