@@ -2398,7 +2398,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &369847432
 PrefabInstance:
@@ -5431,7 +5431,7 @@ RectTransform:
   m_Children:
   - {fileID: 1701861646}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7003,7 +7003,7 @@ Transform:
   m_LocalScale: {x: 3.59864, y: 3.59864, z: 3.59864}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &928678845 stripped
 Transform:
@@ -16142,6 +16142,7 @@ MonoBehaviour:
   player: {fileID: 2103538869}
   bola: {fileID: 790580328}
   anim: {fileID: 2023272540}
+  distance: 0
 --- !u!1 &2110518720
 GameObject:
   m_ObjectHideFlags: 0
@@ -16886,7 +16887,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2634199060581498433, guid: 90e99c8b1995ca04e8087fafc64fdc58, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2634199060581498433, guid: 90e99c8b1995ca04e8087fafc64fdc58, type: 3}
       propertyPath: m_LocalPosition.x

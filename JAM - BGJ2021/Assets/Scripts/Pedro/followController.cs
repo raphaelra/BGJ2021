@@ -11,9 +11,12 @@ public class followController : MonoBehaviour
 	public Animator anim;
 
     bool segue = false;
+	public float distance;
 
     void Update()
     {
+		distance = Vector3.Distance(player.transform.position,agent.transform.position);
+
     	if(Input.GetKeyDown(KeyCode.F)){
     		if(segue == false){
     			segue = true;
@@ -22,9 +25,24 @@ public class followController : MonoBehaviour
     		}
     	}
     	if(segue == true){
+			anim.SetBool("wave", false);
         	agent.SetDestination(player.transform.position);
-			anim.SetBool("idle", false);
+			anim.SetBool("run", true);
             //agent2.SetDestination(bola.transform.position);
-    	}
+			if (distance <= 10f)
+			{
+				anim.SetBool("run", false);
+			}else {
+				anim.SetBool("run", true);
+			}
+    	}else 
+		{
+			if (distance >= 20f){
+				anim.SetBool("wave", true);
+			}else 
+			{
+				anim.SetBool("wave", false);
+			}
+		}
     }
 }
