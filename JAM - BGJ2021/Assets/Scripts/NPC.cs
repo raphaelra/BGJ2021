@@ -10,13 +10,16 @@ public class NPC : MonoBehaviour
     [SerializeField] float view_range;
     [SerializeField] LayerMask player_layer;
     bool player_in_range;
-    bool can_follow = false; 
+    public bool can_follow = false; 
     [SerializeField] int index;
+    bool added = false;
+    GameObject game_manager;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        follow_manager = GameObject.FindWithTag("Follow Manager").GetComponent<FollowManager>();
+        game_manager = GameObject.Find("GameManager");
+        follow_manager = game_manager.GetComponent<FollowManager>();
     }
 
     void Update()
@@ -25,9 +28,10 @@ public class NPC : MonoBehaviour
 
         if(player_in_range)
         {
-            print("detectou player");
             can_follow = true;
+
             index = follow_manager.NPC.Count - 1;
+
             view_range = 0f;
         }
 
@@ -35,9 +39,10 @@ public class NPC : MonoBehaviour
         {            
             agent.SetDestination(follow_manager.NPC[index].transform.position);
 
-            if(follow_manager.NPC.Contains(transform) == false)
+            if(added == false)
             {
                 follow_manager.UpdateList(transform);
+                added = true;                
             }
         }
     }

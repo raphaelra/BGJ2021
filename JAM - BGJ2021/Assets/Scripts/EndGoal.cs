@@ -10,8 +10,7 @@ public class EndGoal : MonoBehaviour
     FollowManager follow_manager;
     LevelManager level_manager;
     [SerializeField] Transform end_position;
-    [SerializeField] float min_offset = 2.5f;
-    [SerializeField] float max_offset = 5f;
+    [SerializeField] float offset = 3f;
 
     void Start()
     {
@@ -37,10 +36,13 @@ public class EndGoal : MonoBehaviour
     {
         for(int i = 1; i < follow_manager.NPC.Count; i++) //começa no 1 porque 0 é o player
         {
-            Vector3 difference = new Vector3 (Random.Range(min_offset, max_offset), 0f, Random.Range(min_offset, max_offset));
+            Vector3 difference = new Vector3 (Random.Range(-offset, offset), 0f, Random.Range(-offset, offset));
 
             NavMeshAgent agent = follow_manager.NPC[i].GetComponent<NavMeshAgent>();
+            NPC npc = follow_manager.NPC[i].GetComponent<NPC>();
+            npc.can_follow = false;
 
+            print(agent.name + " está indo para " + end_position.position);
             agent.SetDestination(end_position.position + difference);
         }
     }

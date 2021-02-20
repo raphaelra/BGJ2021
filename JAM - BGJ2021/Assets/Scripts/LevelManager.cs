@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        follow_manager = GameObject.FindWithTag("Follow Manager").GetComponent<FollowManager>();
+        follow_manager = GetComponent<FollowManager>();
         player = GameObject.FindWithTag("Player").transform;
     }
 
@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
     {
         if(current_npcs >= total_of_npcs)
         {
+            EndLevelDisplay();
             NextLevel(next_level);
         }
     }
@@ -33,8 +34,13 @@ public class LevelManager : MonoBehaviour
         follow_manager.ResetList();
     }
 
+    public void EndLevelDisplay()
+    {
+        //animar a UI com um botãoq que triggar que NextLevel()
+    }
+
     void NextLevel(string s)
     {
-
+        SceneManager.LoadScene(next_level);
     }
 }

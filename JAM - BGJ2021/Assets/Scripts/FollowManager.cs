@@ -13,6 +13,14 @@ public class FollowManager : MonoBehaviour
         NPC.Add(player);
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            print(NPC.Count);
+        }
+    }
+
     public void UpdateList(Transform obj)
     {
         NPC.Add(obj);
@@ -20,8 +28,7 @@ public class FollowManager : MonoBehaviour
 
     public void ResetList()
     {
-        NPC.Clear();
-        NPC.Add(player);
+        NPC.RemoveRange(1, NPC.Count - 1);
     }
     
 }
