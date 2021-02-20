@@ -24,7 +24,8 @@ public class followController : MonoBehaviour
     			segue = false;
     		}
     	}
-    	if(segue == true){
+    	if(segue == true)
+		{
 			anim.SetBool("wave", false);
         	agent.SetDestination(player.transform.position);
 			anim.SetBool("run", true);
@@ -32,15 +33,13 @@ public class followController : MonoBehaviour
 			if (distance <= 10f)
 			{
 				anim.SetBool("run", false);
-			}else {
+			} else {
 				anim.SetBool("run", true);
 			}
-    	}else 
-		{
+    	} else {
 			if (distance >= 20f){
 				anim.SetBool("wave", true);
-			}else 
-			{
+			} else {
 				anim.SetBool("wave", false);
 			}
 		}

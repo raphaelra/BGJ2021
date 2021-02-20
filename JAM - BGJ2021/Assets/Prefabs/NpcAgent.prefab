@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2634199060581498437}
   - component: {fileID: 2634199060581498438}
   - component: {fileID: 3511077697780209311}
+  - component: {fileID: 5670729378547039672}
+  - component: {fileID: 2152157882100631070}
   m_Layer: 0
   m_Name: NpcAgent
   m_TagString: Untagged
@@ -138,6 +140,39 @@ CapsuleCollider:
   m_Height: 6.7146544
   m_Direction: 1
   m_Center: {x: -0, y: 2.8573267, z: 0}
+--- !u!114 &5670729378547039672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634199060581498439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2107963e888e72248a7abf2a7b33bc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view_range: 7
+  player_layer:
+    serializedVersion: 2
+    m_Bits: 64
+  can_follow: 0
+  index: 0
+  Seta: {fileID: 2634199061003117586}
+  segue: 0
+--- !u!114 &2152157882100631070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634199060581498439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793ae8de71914c54f9a8051467121195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStaticDancingNPC: 0
 --- !u!1 &2634199061003117586
 GameObject:
   m_ObjectHideFlags: 0

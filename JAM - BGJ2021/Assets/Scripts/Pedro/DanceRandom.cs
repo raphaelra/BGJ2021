@@ -18,7 +18,7 @@ public class DanceRandom : MonoBehaviour
         }
     }
 
-    private void Randomizer()
+    public void Randomizer()
     {
         danceIndex = Random.Range(1,4);
         anim.SetTrigger("dance"+danceIndex);

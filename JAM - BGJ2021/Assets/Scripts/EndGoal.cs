@@ -40,7 +40,12 @@ public class EndGoal : MonoBehaviour
 
             NavMeshAgent agent = follow_manager.NPC[i].GetComponent<NavMeshAgent>();
             NPC npc = follow_manager.NPC[i].GetComponent<NPC>();
+            DanceRandom danceRandom = follow_manager.NPC[i].GetComponent<DanceRandom>();
             npc.can_follow = false;
+            npc.segue = false;
+            npc.entregue = true;
+            npc.CancelAnimation();
+            danceRandom.Randomizer();
 
             print(agent.name + " está indo para " + end_position.position);
             agent.SetDestination(end_position.position + difference);

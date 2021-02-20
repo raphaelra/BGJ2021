@@ -15,15 +15,25 @@ public class NPC : MonoBehaviour
     bool added = false;
     GameObject game_manager;
 
+    private GameObject player;
+    public GameObject Seta;
+    private Animator npcAnim;
+    private float distance;
+    public bool segue = false;
+    public bool entregue = false;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         game_manager = GameObject.Find("GameManager");
         follow_manager = game_manager.GetComponent<FollowManager>();
+        player = GameObject.Find("PlayerPrefab");
+        npcAnim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
+        distance = Vector3.Distance(player.transform.position, this.transform.position);
         player_in_range = Physics.CheckSphere(transform.position, view_range, player_layer);
 
         if(player_in_range)
@@ -38,18 +48,49 @@ public class NPC : MonoBehaviour
         if(can_follow)
         {            
             agent.SetDestination(follow_manager.NPC[index].transform.position);
+            segue = true;
+            Seta.active = false;
 
             if(added == false)
             {
                 follow_manager.UpdateList(transform);
                 added = true;                
             }
+            
         }
+
+        if(segue)
+		{
+			npcAnim.SetBool("wave", false);
+			npcAnim.SetBool("run", true);
+			if (distance <= 10f)
+			{
+				npcAnim.SetBool("run", false);
+			} else {
+				npcAnim.SetBool("run", true);
+			}
+    	} 
+        
+        if (!entregue) {
+			if (distance >= 20f){
+				npcAnim.SetBool("wave", true);
+			} else {
+				npcAnim.SetBool("wave", false);
+			}
+		}
+
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, view_range);
+    }
+
+    public void CancelAnimation ()
+    {
+        npcAnim.SetBool("wave", false);
+        npcAnim.SetBool("idle", true);
+        npcAnim.SetBool("run", false);
     }
 }

@@ -33,7 +33,6 @@ public class BasicCharacter : MonoBehaviour
 	void Update(){
 		horizontal = Input.GetAxis("Horizontal");
 		vertical = Input.GetAxis("Vertical");
-		Debug.Log(controller.isGrounded);
 		
 		if (!isDead)
 		{
