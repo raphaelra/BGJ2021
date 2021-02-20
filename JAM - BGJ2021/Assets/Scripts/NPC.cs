@@ -10,8 +10,8 @@ public class NPC : MonoBehaviour
     [SerializeField] float view_range;
     [SerializeField] LayerMask player_layer;
     bool player_in_range;
-    public bool can_follow = false; 
-    [SerializeField] int index;
+    [HideInInspector] public bool can_follow = false; 
+    int index;
     bool added = false;
     GameObject game_manager;
 
