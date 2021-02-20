@@ -34345,7 +34345,7 @@ PrefabInstance:
       objectReference: {fileID: 2040878043}
     - target: {fileID: 8065871153162261045, guid: aa5b474b6bfea3b4580ea317fa4048e1, type: 3}
       propertyPath: next_level
-      value: tutorial
+      value: Main_Menu
       objectReference: {fileID: 0}
     - target: {fileID: 8065871153162261045, guid: aa5b474b6bfea3b4580ea317fa4048e1, type: 3}
       propertyPath: nextLevelWaitTime

@@ -54,19 +54,26 @@ public class LevelManager : MonoBehaviour
         //animar a UI com um botãoq que triggar que NextLevel()
     }
 
-    void NextLevel()
+    public void NextLevel()
     {
         StartCoroutine("ChangeScene");
     }
 
-    void NextLevelButton(string ss)
+    public void NextLevelButton()
     {
-        SceneManager.LoadScene(ss);
+        StartCoroutine("ChangeSceneButton");
     }
 
-    IEnumerator ChangeScene()
+    public IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(4);
+        fadeT.active = true;
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(next_level);
+    }
+
+    public IEnumerator ChangeSceneButton()
+    {
         fadeT.active = true;
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(next_level);
