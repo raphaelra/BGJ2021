@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
 
             Animator anim = player.GetComponentInChildren<Animator>();
             CharacterController controller = player.GetComponent<CharacterController>();
+            BasicCharacter bc = player.GetComponent<BasicCharacter>();
             controller.enabled = false;
             
             GameObject playerModel = GameObject.Find("radio");
@@ -42,6 +43,8 @@ public class LevelManager : MonoBehaviour
 		    anim.SetBool("walk", false);
 		    anim.SetBool("land", false);
             anim.SetTrigger("dance");
+
+            bc.terminouFase = true;
 
             NextLevel();
         }

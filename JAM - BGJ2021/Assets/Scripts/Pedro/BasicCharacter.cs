@@ -22,10 +22,16 @@ public class BasicCharacter : MonoBehaviour
 	private bool isDead = false;
 	private Vector3 firstPosition;
 
+	public ParticleSystem system1, system2;
+
+	public bool terminouFase = false;
+	public bool parado = true;
+
 	void Start(){
 		controller = GetComponent<CharacterController>();
 		firstPosition = transform.position;
 		anim.SetTrigger("dance");
+		terminouFase = false;
 		//StartCoroutine("Move");
 	}
 
@@ -86,12 +92,22 @@ public class BasicCharacter : MonoBehaviour
 
 		if(((horizontal != 0 || vertical != 0)) && !isDead){
 			anim.SetBool("walk", true);
+			parado = false;
 			transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
 			Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
 			playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
 		}
 
 		//anim.SetFloat("Speed", (Mathf.Abs(vertical)) + Mathf.Abs(horizontal));
+
+		if(controller.isGrounded && !isDead && terminouFase == false && parado == false)
+		{
+			system1.Play();
+			system2.Play();
+		}else {
+			system1.Stop();
+			system2.Stop();
+		}
 
 	}
 
@@ -111,6 +127,7 @@ public class BasicCharacter : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 
 		isDead = false;	
+		parado = true;
 		firstPosition.y = transform.position.y;
 		transform.position = new Vector3(firstPosition.x, 20f, firstPosition.z);
 		playerModel.transform.rotation = Quaternion.Euler(0f, -135f, 0f);
