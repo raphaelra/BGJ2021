@@ -15,14 +15,18 @@ public class LevelManager : MonoBehaviour
 
     public GameObject fadeT;
 
+    private TMPro.TextMeshProUGUI NpcText;
+
     void Start()
     {
         follow_manager = GetComponent<FollowManager>();
         player = GameObject.FindWithTag("Player").transform;
+        NpcText  = GameObject.Find("BonecoText").GetComponent<TMPro.TextMeshProUGUI>();
     }
 
     void Update()
     {
+        NpcText.text = current_npcs + " / " + total_of_npcs;
         if(current_npcs >= total_of_npcs)
         {
             EndLevelDisplay();
@@ -41,6 +45,7 @@ public class LevelManager : MonoBehaviour
 
             NextLevel();
         }
+
     }
 
     public void UpdateScore(int i)
